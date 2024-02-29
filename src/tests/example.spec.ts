@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test"
 import { forTest } from "@utils/sample.util"
 
-test.only("has title", async () => {
+test("has title", async () => {
   console.log(forTest)
 })
 
