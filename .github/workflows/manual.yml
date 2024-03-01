@@ -6,17 +6,15 @@ on:
 jobs:
   trigger:
     runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 20
     steps:
     - uses: actions/checkout@v4
 
     - uses: actions/setup-node@v4
       with:
-        node-version: 20
+        node-version: ${{ env.NODE_VERSION }}
         cache: 'npm'
-
-    - name: Get node version
-      id: node_version
-      run: echo "::set-output name=version::$(node -v)"
 
     - name: Cache dependencies
       uses: actions/cache@v4
@@ -24,22 +22,22 @@ jobs:
       with:
         path: |
           **/node_modules
-        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}-${{ steps.node_version.outputs.version }}
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('**/package-lock.json') }}-${{ env.NODE_VERSION }}
 
     - name: Get playwright version
       id: playwright_version
-      run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').devDependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+      run: echo "PLAYWRIGHT_VERSION=$(jq -r '.devDependencies["@playwright/test"].version' package-lock.json)" >> $GITHUB_ENV
 
     - name: Cache playwright binaries
       uses: actions/cache@v4
       id: cache-playwright
       with: 
         path: ~/.cache/ms-playwright
-        key: ${{ runner.os }}-playwright-${{ steps.playwright_version.outputs.version }}
+        key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
         restore-keys: |
             ${{ runner.os }}-playwright-
 
-    - if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
+    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
       name: List the state of node modules
       continue-on-error: true
       run: npm list
