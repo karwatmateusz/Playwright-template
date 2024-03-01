@@ -18,7 +18,7 @@ jobs:
         path: ~/.npm
         key: ${{ runner.os }}-node
 
-    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+    - if: ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
       name: List the state of node modules
       continue-on-error: true
       run: npm list
