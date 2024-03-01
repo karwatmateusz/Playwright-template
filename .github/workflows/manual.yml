@@ -4,7 +4,5 @@ on:
   workflow_dispatch
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/install-run-dependencies.yml
+  tests:
+    uses: ./.github/workflows/install-run-dependencies.yml
