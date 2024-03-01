@@ -10,22 +10,17 @@ jobs:
     - uses: actions/checkout@v4
       with:
         ref: test-branch
-    
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 18
-    
-    - name: Install dependencies
-      run: npm ci
-    
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
 
     - name: Cache dependencies
       uses: actions/cache@v4
       with:
         path: ~/.npm
         key: ${{ runner.os }}-node
+
+    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      name: List the state of node modules
+      continue-on-error: true
+      run: npm list
     
     - name: Run Playwright tests
       run: npx playwright test
