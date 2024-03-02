@@ -18,7 +18,9 @@
     "quotes": ["error", "double"],
     "semi": ["error", "never"],
     "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
-    "typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "@typescript-eslint/no-floating-promises": "warn",
+    "@typescript-eslint/no-misused-promises": "warn",
     "prettier/prettier": [
       "error",
       {
