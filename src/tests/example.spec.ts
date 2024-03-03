@@ -5,6 +5,10 @@ test("has title", async () => {
   console.log(forTest)
 })
 
+test("failing test", async () => {
+  expect(1).toEqual(2)
+})
+
 test("get started link", async ({ page }) => {
   await page.goto("https://playwright.dev/")
 
