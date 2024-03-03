@@ -62,6 +62,7 @@ jobs:
         retention-days: 30
 
     - name: Setup Pages
+      if: always()
       uses: actions/configure-pages@v4
     
     - name: Upload artifact
