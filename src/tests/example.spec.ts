@@ -7,6 +7,7 @@ test("has title", async () => {
 
 test("failing test", async () => {
   expect(1).toEqual(2)
+  await someAsyncFunction("1", 2)
 })
 
 test("get started link", async ({ page }) => {
@@ -18,3 +19,7 @@ test("get started link", async ({ page }) => {
   // Expects page to have a heading with the name of Installation.
   await expect(page.getByRole("heading", { name: "Installation" })).toBeVisible()
 })
+
+async function someAsyncFunction(name: string, id: number) {
+  console.log(name, id)
+}
