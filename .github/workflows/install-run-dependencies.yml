@@ -10,9 +10,9 @@ permissions:
 
 jobs:  
   reusable_tests_job:
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -97,18 +97,23 @@ jobs:
           path: playwright-report
           retention-days: 7
       
-    # - name: Setup Pages
-    #   if: always()
-    #   uses: actions/configure-pages@v4
+  upload-report:
+    if: always()
+    needs: merge-reports
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Pages
+      if: always()
+      uses: actions/configure-pages@v4
     
-    # - name: Upload artifact
-    #   if: always()
-    #   uses: actions/upload-pages-artifact@v3
-    #   with:
-    #     name: playwright-report
-    #     path: playwright-report/
+    - name: Upload artifact
+      if: always()
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: html-report--attempt-${{ github.run_attempt }}
+        path: playwright-report/
     
-    # - name: Deploy to GitHub Pages
-    #   if: always()
-    #   id: deployment
-    #   uses: actions/deploy-pages@v4
+    - name: Deploy to GitHub Pages
+      if: always()
+      id: deployment
+      uses: actions/deploy-pages@v4
