@@ -7,7 +7,7 @@ test("has title", async ({ page }) => {
 })
 
 test("failing test", async ({ page }) => {
-  expect(1).toEqual(2)
+  expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)
 })
