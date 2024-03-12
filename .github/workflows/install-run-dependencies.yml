@@ -10,9 +10,6 @@ permissions:
 
 jobs:  
   reusable_tests_job:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -101,7 +98,22 @@ jobs:
     if: always()
     needs: merge-reports
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+
+    - name: Download reports
+      uses: actions/download-artifact@v4
+      with:
+        path: playwright-report
+        pattern: html-report--attempt-*
+
     - name: Setup Pages
       if: always()
       uses: actions/configure-pages@v4
