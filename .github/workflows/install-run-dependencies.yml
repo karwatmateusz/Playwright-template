@@ -111,7 +111,7 @@ jobs:
     - name: Download reports
       uses: actions/download-artifact@v4
       with:
-        path: playwright-report
+        path: reports/
         pattern: html-report--attempt-*
 
     - name: Setup Pages
@@ -122,8 +122,8 @@ jobs:
       if: always()
       uses: actions/upload-pages-artifact@v3
       with:
-        name: html-report--attempt-${{ github.run_attempt }}
-        path: playwright-report/
+        name: html-report-${{ github.run_attempt }}
+        path: reports/
     
     - name: Deploy to GitHub Pages
       if: always()
