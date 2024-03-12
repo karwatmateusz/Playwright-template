@@ -103,10 +103,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'npm'
 
     - name: Download reports
       uses: actions/download-artifact@v4
@@ -122,10 +118,12 @@ jobs:
       if: always()
       uses: actions/upload-pages-artifact@v3
       with:
-        name: html-report-${{ github.run_attempt }}
+        name: html-report
         path: reports/
     
     - name: Deploy to GitHub Pages
       if: always()
       id: deployment
       uses: actions/deploy-pages@v4
+      with:
+       artifact_name: html-report
