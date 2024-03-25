@@ -2,7 +2,7 @@ name: Scheduled job to run once a day
 
 on:
   schedule:
-    - cron: '00 20 * * *'
+    - cron: '00 16 * * *'
     
 jobs:
   tests:
