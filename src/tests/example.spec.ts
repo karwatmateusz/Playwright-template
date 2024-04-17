@@ -7,7 +7,7 @@ import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
 
-test.only("has title", async () => {
+test("has title", async () => {
   dayjs.extend(utc)
   dayjs.extend(timezone)
   console.log(forTest)
