@@ -7,27 +7,36 @@ import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
 
-test("has title", async () => {
+test.only("has title", async () => {
   dayjs.extend(utc)
   dayjs.extend(timezone)
   console.log(forTest)
   console.log("timezones")
   const serverDate = dayjs()
-  console.log(`dayjs(): ${serverDate.toISOString()}`)
-  const serverDate2 = dayjs
-  console.log(`dayjs: ${serverDate2.toString()}`)
+  console.log(`dayjs(): ${serverDate.format()}`)
   const serverDate3 = dayjs.utc()
-  console.log(`dayjs.utc(): ${serverDate3.toISOString()}`)
-  const serverDate4 = dayjs.tz("America/New_York")
-  console.log(`dayjs.tz("America/New_York"): ${serverDate4.toISOString()}`)
+  console.log(`dayjs.utc(): ${serverDate3.format()}`)
   const serverDate5 = dayjs().tz("America/New_York")
-  console.log(`dayjs().tz("America/New_York"): ${serverDate5.toISOString()}`)
+  console.log(`dayjs().tz("America/New_York"): ${serverDate5.format()}`)
   const serverDate6 = dayjs().tz("America/New_York", true)
-  console.log(`dayjs().tz("America/New_York", true): ${serverDate6.toISOString()}`)
+  console.log(`dayjs().tz("America/New_York", true): ${serverDate6.format()}`)
   const serverDate7 = dayjs().tz("America/New_York", false)
-  console.log(`dayjs().tz("America/New_York", false): ${serverDate7.toISOString()}`)
-  const serverDate8 = dayjs.tz("America/New_York", "Europe/Warsaw")
-  console.log(`dayjs.tz("America/New_York", "Europe/Warsaw"): ${serverDate8.toISOString()}`)
+  console.log(`dayjs().tz("America/New_York", false): ${serverDate7.format()}`)
+  console.log(`test america to utc: ${dayjs.tz(serverDate6, "utc").format()}`)
+
+  const testDate = dayjs().startOf("month").startOf("day")
+  console.log(`testDate: ${testDate.format()}`)
+  console.log(`testDate: ${testDate.toISOString()}`)
+  console.log(`testDate: ${testDate.toDate()}`)
+  console.log(`testDate to america: ${dayjs.tz(testDate, "America/New_York").toISOString()}`)
+  console.log(`testDate to america: ${dayjs(testDate).tz("America/New_York").toISOString()}`)
+  console.log(`testDate to america: ${dayjs.tz(testDate, "America/New_York")}`)
+  console.log(`testDate to america: ${dayjs(testDate).tz("America/New_York")}`)
+  console.log(`testDate to america: ${dayjs.tz(testDate, "America/New_York").format()}`)
+  console.log(`testDate to america: ${dayjs(testDate).tz("America/New_York").format()}`)
+
+  console.log(`start of the month in current timezone: ${dayjs().startOf("month").format()}`)
+  console.log(`start of the month in utc timezone: ${dayjs.utc().startOf("month").format()}`)
 })
 
 test("failing test", async ({ page }) => {
