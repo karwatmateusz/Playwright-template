@@ -1,15 +1,40 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable no-var */
 import { test, expect } from "@playwright/test"
 import { forTest } from "@utils/sample.util"
+import uiPages from "@utils/ui-pages"
+import dayjs from "dayjs"
+import utc from "dayjs/plugin/utc"
+import timezone from "dayjs/plugin/timezone"
 
-test("has title", async ({ page }) => {
+test("has title", async () => {
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
   console.log(forTest)
-  await page.waitForTimeout(5000)
+  console.log("timezones")
+  const serverDate = dayjs()
+  console.log(`dayjs(): ${serverDate.toISOString()}`)
+  const serverDate2 = dayjs
+  console.log(`dayjs: ${serverDate2.toString()}`)
+  const serverDate3 = dayjs.utc()
+  console.log(`dayjs.utc(): ${serverDate3.toISOString()}`)
+  const serverDate4 = dayjs.tz("America/New_York")
+  console.log(`dayjs.tz("America/New_York"): ${serverDate4.toISOString()}`)
+  const serverDate5 = dayjs().tz("America/New_York")
+  console.log(`dayjs().tz("America/New_York"): ${serverDate5.toISOString()}`)
+  const serverDate6 = dayjs().tz("America/New_York", true)
+  console.log(`dayjs().tz("America/New_York", true): ${serverDate6.toISOString()}`)
+  const serverDate7 = dayjs().tz("America/New_York", false)
+  console.log(`dayjs().tz("America/New_York", false): ${serverDate7.toISOString()}`)
+  const serverDate8 = dayjs.tz("America/New_York", "Europe/Warsaw")
+  console.log(`dayjs.tz("America/New_York", "Europe/Warsaw"): ${serverDate8.toISOString()}`)
 })
 
 test("failing test", async ({ page }) => {
   expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)
+  uiPages.home
 })
 
 test("get started link", async ({ page }) => {

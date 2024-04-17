@@ -4,6 +4,7 @@
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
+    "esModuleInterop": true,
     "paths": {
       "@utils/*": ["./src/utils/*"],
       "@setup/*": ["./setup/*"],
