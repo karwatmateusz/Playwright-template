@@ -24,7 +24,7 @@ test("has title", async () => {
   console.log(`dayjs().tz("America/New_York", false): ${serverDate7.format()}`)
   console.log(`test america to utc: ${dayjs.tz(serverDate6, "utc").format()}`)
 
-  const testDate = dayjs().startOf("month").startOf("day")
+  const testDate = dayjs()
   console.log(`testDate: ${testDate.format()}`)
   console.log(`testDate: ${testDate.toISOString()}`)
   console.log(`testDate: ${testDate.toDate()}`)
@@ -37,6 +37,9 @@ test("has title", async () => {
 
   console.log(`start of the month in current timezone: ${dayjs().startOf("month").format()}`)
   console.log(`start of the month in utc timezone: ${dayjs.utc().startOf("month").format()}`)
+  console.log(
+    `start of the month in pl timezone: ${dayjs.utc().startOf("month").tz("Europe/Warsaw").format()}`
+  )
 })
 
 test("failing test", async ({ page }) => {
