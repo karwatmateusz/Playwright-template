@@ -40,6 +40,9 @@ test("has title", async () => {
   console.log(
     `start of the month in pl timezone: ${dayjs.utc().startOf("month").tz("Europe/Warsaw").format()}`
   )
+  console.log(
+    `transform current to pl timezone: ${dayjs.utc().startOf("month").tz("Europe/Warsaw").format()}`
+  )
 })
 
 test("failing test", async ({ page }) => {
