@@ -41,7 +41,7 @@ test("has title", async () => {
     `start of the month in pl timezone: ${dayjs.utc().startOf("month").tz("Europe/Warsaw").format()}`
   )
   console.log(
-    `transform current to pl timezone: ${dayjs.utc().startOf("month").tz("Europe/Warsaw").format()}`
+    `transform current to pl timezone: ${dayjs.tz(dayjs.utc().startOf("month").toISOString(), "Europe/Warsaw").format()}`
   )
 })
 
