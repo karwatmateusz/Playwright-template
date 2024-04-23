@@ -11,10 +11,9 @@ permissions:
 jobs:  
   reusable_tests_job:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        shardIndex: [1, 2, 3]
-        shardTotal: [3]
+    environment: 
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -58,72 +57,21 @@ jobs:
       uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: blob-report-${{ matrix.shardIndex }}
-        path: blob-report
+        name: test-results
+        path: playwright-report/
         retention-days: 1
 
-  merge-reports:
-    if: always()
-    needs: reusable_tests_job
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Download reports
-        uses: actions/download-artifact@v4
-        with:
-          path: all-blob-reports
-          pattern: blob-report-*
-          merge-multiple: true
-
-      - name: Merge reports
-        run: npx playwright merge-reports --reporter html ./all-blob-reports
-      
-      - name: Upload HTML report
-        uses: actions/upload-artifact@v4
-        with:
-          name: html-report--attempt-${{ github.run_attempt }}
-          path: playwright-report
-          retention-days: 7
-      
-  upload-report:
-    if: always()
-    needs: merge-reports
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Download reports
-      uses: actions/download-artifact@v4
-      with:
-        path: reports/
-        pattern: html-report--attempt-*
-
-    - name: Setup Pages
-      if: always()
+    - name: setup github pages
       uses: actions/configure-pages@v4
-    
+
     - name: Upload artifact
-      if: always()
       uses: actions/upload-pages-artifact@v3
       with:
-        name: html-report
-        path: reports/
-    
-    - name: Deploy to GitHub Pages
-      if: always()
+        name: report
+        path: playwright-report/
+
+    - name: deploy
       id: deployment
       uses: actions/deploy-pages@v4
       with:
-       artifact_name: html-report
+        artifact_name: report
