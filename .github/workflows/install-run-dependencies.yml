@@ -75,3 +75,26 @@ jobs:
       uses: actions/deploy-pages@v4
       with:
         artifact_name: report
+  report:
+    needs: reusable_tests_job
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/download-artifact@v4
+      with:
+        name: report
+        path: playwright-report/
+
+    - name: setup pages
+      uses: actions/configure-pages@v4
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        name: report
+        path: playwright-report/
+
+    - name: deploy
+      id: deployment
+      uses: actions/deploy-pages@v4
+      with:
+        artifact_name: report
