@@ -41,6 +41,7 @@ runs:
       shell: bash
 
     - name: display event name
+      shell: bash
       run: |
         echo "event name is ${{ github.event_name }}"
 
