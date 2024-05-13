@@ -40,6 +40,10 @@ runs:
       run: npx playwright install --with-deps chromium
       shell: bash
 
+    - name: display event name
+      run: |
+        echo "event name is ${{ github.event_name }}"
+
     - name: Run Playwright tests
       run: npx playwright test
       shell: bash
