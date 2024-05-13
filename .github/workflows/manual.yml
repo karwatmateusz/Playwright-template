@@ -1,17 +1,24 @@
 name: Playwright tests run manually
 
 on:
-  workflow_dispatch
+  workflow_dispatch:
+    inputs:
+      type:
+        description: "text"
+        type: string
 
 jobs:  
   reusable_tests_job:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: 20
-        cache: 'npm'
+
+    - name: override text
+      run: |
+        echo "current text ${{ github.event.inputs.type }}"
+        echo "changing"
+        echo "some" >> ${{ github.event.inputs.type }}
+        echo "new text ${{ github.event.inputs.type }}"
       
     - name: start
       uses: ./.github/actions/run-tests/
