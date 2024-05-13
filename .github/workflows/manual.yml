@@ -5,4 +5,10 @@ on:
 
 jobs:
   tests:
-    uses: ./.github/workflows/install-run-dependencies.yml
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      
+      - name: start
+        uses: ./.github/actions/run-tests
