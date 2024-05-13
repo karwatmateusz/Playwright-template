@@ -1,11 +1,12 @@
 name: Install dependencies and run tests
 
-runs:  
+runs:
   using: "composite"
+  steps:
     - uses: actions/setup-node@v4
       with:
         node-version: 20
-        cache: 'npm'
+        cache: "npm"
 
     - name: Cache dependencies
       uses: actions/cache@v4
@@ -18,11 +19,11 @@ runs:
     - name: Cache playwright binaries
       uses: actions/cache@v4
       id: cache-playwright
-      with: 
+      with:
         path: ~/.cache/ms-playwright
         key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
         restore-keys: |
-            ${{ runner.os }}-playwright-
+          ${{ runner.os }}-playwright-
 
     - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
       name: List the state of node modules
