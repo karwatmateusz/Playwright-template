@@ -3,12 +3,15 @@ name: Playwright tests run manually
 on:
   workflow_dispatch
 
-jobs:
-  tests:
+jobs:  
+  reusable_tests_job:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
       
-      - name: start
-        uses: ./.github/actions/run-tests/action
+    - name: start
+      uses: ./.github/actions/run-tests/
