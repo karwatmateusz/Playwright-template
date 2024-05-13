@@ -11,4 +11,4 @@ jobs:
         uses: actions/checkout@v4
       
       - name: start
-        uses: ./.github/actions/run-tests
+        uses: ./.github/actions/run-tests/action
