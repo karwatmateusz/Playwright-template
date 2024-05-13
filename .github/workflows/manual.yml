@@ -17,7 +17,7 @@ jobs:
       run: |
         echo "current text ${{ github.event.inputs.type }}"
         echo "changing"
-        echo "some" >> ${{ github.event.inputs.type }}
+        echo "type=gggg" >> ${{ github.event.inputs.type }}
         echo "new text ${{ github.event.inputs.type }}"
       
     - name: start
