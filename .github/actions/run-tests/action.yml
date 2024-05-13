@@ -29,7 +29,6 @@ runs:
       name: List the state of node modules
       continue-on-error: true
       run: npm list
-      shell: bash
 
     - name: Install dependencies
       run: npm ci
@@ -38,8 +37,6 @@ runs:
     - name: Install Playwright Browsers
       if: ${{ steps.cache-playwright.outputs.cache-hit != 'true' }}
       run: npx playwright install --with-deps chromium
-      shell: bash
 
     - name: Run Playwright tests
       run: npx playwright test
-      shell: bash
