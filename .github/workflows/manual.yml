@@ -13,12 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: prepare text
+      id: typetext
+      run: |
+        TYPE=${{ github.event.inputs.type }}
+        echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
+    
     - name: override text
       run: |
-        echo "current text ${{ github.event.inputs.type }}"
-        echo "changing"
-        echo "type=gggg" >> ${{ github.event.inputs.type }}
-        echo "new text ${{ github.event.inputs.type }}"
+        TYPE="xxxx"
+        echo "Type: $TYPE"
       
     - name: start
       uses: ./.github/actions/run-tests/
