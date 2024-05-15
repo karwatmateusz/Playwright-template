@@ -1,5 +1,12 @@
 name: Install dependencies and run tests
 description: "A composite action that runs a sequence of steps"
+inputs:
+  some:
+    description: "A list of steps to run"
+    required: true
+  value:
+    description: "The working directory"
+    required: true
 runs:
   using: "composite"
   steps:
