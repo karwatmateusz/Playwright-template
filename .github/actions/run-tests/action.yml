@@ -45,6 +45,8 @@ runs:
       run: |
         echo "event name is ${{ github.event_name }}"
         echo "type ${{ github.event.inputs.type }}"
+        echo "some is ${{ github.event.inputs.some }}"
+        echo "value is ${{ github.event.inputs.value }}"
 
     - name: Run Playwright tests
       run: npx playwright test

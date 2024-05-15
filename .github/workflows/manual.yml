@@ -29,3 +29,6 @@ jobs:
       
     - name: start
       uses: ./.github/actions/run-tests/
+      with:
+        some: "some123"
+        value: "value123"
