@@ -1,10 +1,10 @@
 import { expect, test } from "@playwright/test"
-import { forTest } from "@utils/sample.util"
+// import { forTest } from "@utils/sample.util"
 
-test("has title", async ({ page }) => {
-  console.log(forTest)
-  await page.waitForTimeout(5000)
-})
+// test("has title", async ({ page }) => {
+//   console.log(forTest)
+//   await page.waitForTimeout(5000)
+// })
 
 test("failing test", async ({ page }) => {
   expect(1).toEqual(1)
