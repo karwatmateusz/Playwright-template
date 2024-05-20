@@ -32,3 +32,16 @@ jobs:
       with:
         some: "some123"
         value: "value123"
+
+    - name: delete something
+      run: |
+        echo "Deleting something"
+        rm -rf ./featureMap/file-to-delete.yml
+
+    - name: commit change
+      run: |
+       echo "Committing change"
+       git checkout test-b
+       git add .
+       git commit -m "test commit"
+       git push
