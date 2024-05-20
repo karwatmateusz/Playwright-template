@@ -41,6 +41,8 @@ jobs:
     - name: commit change
       run: |
        echo "Committing change"
+       git config --global user.email "karwatmateusz07@gmail.com"
+       git config --global user.name "karwatmateusz"
        git checkout test-b
        git add .
        git commit -m "test commit"
