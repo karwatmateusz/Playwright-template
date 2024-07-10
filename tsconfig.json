@@ -3,6 +3,7 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@utils/*": ["./src/utils/*"],
