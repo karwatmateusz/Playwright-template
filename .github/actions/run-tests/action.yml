@@ -1,6 +1,9 @@
 name: Install dependencies and run tests
 description: "A composite action that runs a sequence of steps"
 inputs:
+  env:
+    description: "env to run tests"
+    required: true
   some:
     description: "A list of steps to run"
     required: true
@@ -9,6 +12,7 @@ inputs:
     required: true
 runs:
   using: "composite"
+  environment: ${{inputs.env}}
   steps:
     - uses: actions/setup-node@v4
       with:
@@ -50,6 +54,7 @@ runs:
     - name: display event name
       shell: bash
       run: |
+        echo "env is ${{inputs.env}}"
         echo "event name is ${{ github.event_name }}"
         echo "type ${{ github.event.inputs.type }}"
         echo "some is ${{ inputs.some }}"
