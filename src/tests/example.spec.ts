@@ -18,7 +18,9 @@ test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
 
 test("failing test", { tag: "@test" }, async ({ page }) => {
   console.log("TEST ENV")
-  console.log(configEnv.env)
+  console.log(configEnv.ENV)
+  console.log(process.env.ENV)
+  console.log(process.env._test_beta_acc)
   expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)

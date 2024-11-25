@@ -40,8 +40,8 @@ jobs:
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
         secret-ids: |
-          ENV, test/beta/acc
-
+          ENVIK, test/beta/acc
+          test/beta/acc
 
     - name: run tests
       run: |
@@ -51,7 +51,7 @@ jobs:
       uses: ./.github/actions/run-tests/
       with:
         env: ${{ secrets.ENV_SECRET }}
-        some: "some123"
+        some: ${{ env.ENVIK }}
         value: "value123"
 
     # - name: delete something
