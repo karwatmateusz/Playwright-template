@@ -9,13 +9,14 @@ import timezone from "dayjs/plugin/timezone"
 //   await page.waitForTimeout(5000)
 // })
 
-test("TESTING COMMIT", async ({ page }) => {
+test("TESTING COMMIT", { tag: "qa" }, async ({ page }) => {
   expect(1).toEqual(1)
-  console.log("TESTING COMMIT")
+  console.log("TESTING COMMIT QA ENV")
   await page.waitForTimeout(100)
 })
 
-test("failing test", async ({ page }) => {
+test("failing test", { tag: "test" }, async ({ page }) => {
+  console.log("TEST ENV")
   expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)
