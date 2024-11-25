@@ -5,7 +5,7 @@ import * as dotenv from "dotenv"
 dotenv.config({ path: ".env" })
 
 const envVariables = z.object({
-  env: z.string().optional(),
+  ENV: z.string().optional(),
 })
 
 const configEnv = envVariables.parse(process.env)
