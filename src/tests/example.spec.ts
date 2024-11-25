@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test"
 import dayjs = require("dayjs")
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
+import { configEnv } from "@setup/config"
 // import { forTest } from "@utils/sample.util"
 
 // test("has title", async ({ page }) => {
@@ -17,6 +18,7 @@ test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
 
 test("failing test", { tag: "@test" }, async ({ page }) => {
   console.log("TEST ENV")
+  console.log(configEnv.env)
   expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)

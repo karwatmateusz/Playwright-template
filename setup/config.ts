@@ -7,6 +7,7 @@ dotenv.config({ path: ".env" })
 const envVariables = z.object({
   url: z.string(),
   calculate_coverage: z.string(),
+  env: z.string().optional(),
 })
 
 const configEnv = envVariables.parse(process.env)
