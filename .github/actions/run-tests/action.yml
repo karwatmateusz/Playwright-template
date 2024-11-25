@@ -61,5 +61,5 @@ runs:
         echo "value is ${{ inputs.value }}"
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --grep ${{ inputs.env }}
       shell: bash
