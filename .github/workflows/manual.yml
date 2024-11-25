@@ -40,7 +40,7 @@ jobs:
       uses: aws-actions/aws-secretsmanager-get-secrets@v2
       with:
         secret-ids: |
-          ENV, arn:aws:secretsmanager:eu-north-1:149536461429:secret:test/beta/acc-crsGQ2
+          ENV, test/beta/acc
 
 
     - name: run tests
