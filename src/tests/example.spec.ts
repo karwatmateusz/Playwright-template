@@ -13,13 +13,13 @@ import timezone from "dayjs/plugin/timezone"
 
 test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
   expect(1).toEqual(1)
-  console.log("TESTING COMMIT QA ENV")
+  console.log("TESTING COMMIT QA ENV ")
   await page.waitForTimeout(100)
   // console.log(await secret())
 })
 
 test.only("failing test", { tag: "@test" }, async ({ page }) => {
-  console.log("TEST ENV")
+  console.log("TEST ENV 1")
   // console.log(configEnv)
   // console.log(process.env)
   // console.log(configEnv.ENV)
