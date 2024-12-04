@@ -2,7 +2,8 @@ import { expect, test } from "@playwright/test"
 import dayjs = require("dayjs")
 import utc from "dayjs/plugin/utc"
 import timezone from "dayjs/plugin/timezone"
-import { configEnv } from "@setup/config"
+// import { secret } from "@setup/getAwsData"
+// import { configEnv } from "@setup/config"
 // import { forTest } from "@utils/sample.util"
 
 // test("has title", async ({ page }) => {
@@ -14,16 +15,17 @@ test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
   expect(1).toEqual(1)
   console.log("TESTING COMMIT QA ENV")
   await page.waitForTimeout(100)
+  // console.log(await secret())
 })
 
-test("failing test", { tag: "@test" }, async ({ page }) => {
+test.only("failing test", { tag: "@test" }, async ({ page }) => {
   console.log("TEST ENV")
-  console.log(configEnv)
-  console.log(process.env)
-  console.log(configEnv.ENV)
-  console.log(process.env.ENV)
-  console.log(process.env._test_beta_acc)
-  console.log(process.env.TEST_BETA_ACC)
+  // console.log(configEnv)
+  // console.log(process.env)
+  // console.log(configEnv.ENV)
+  // console.log(process.env.ENV)
+  // console.log(process.env._test_beta_acc)
+  // console.log(process.env.TEST_BETA_ACC)
   expect(1).toEqual(1)
   await someAsyncFunction("1", 2)
   await page.waitForTimeout(5000)
