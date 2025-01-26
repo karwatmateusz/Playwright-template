@@ -1,0 +1,14 @@
+- page: '/start'
+  features:
+    sign in: true
+    sign up: true
+    verify email: false
+    redirect:
+      login: false
+      logout: false
+- page: '/dashboard'
+  features:
+    logout: true
+    login:
+      email: false
+      github: true

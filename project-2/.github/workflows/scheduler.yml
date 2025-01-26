@@ -1,0 +1,9 @@
+name: Scheduled job to run once a day
+
+on:
+  schedule:
+    - cron: '00 20 * * *'
+    
+jobs:
+  tests:
+    uses: ./.github/workflows/install-run-dependencies.yml
