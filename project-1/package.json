@@ -21,7 +21,9 @@
     "typescript-eslint": "^7.1.0"
   },
   "dependencies": {
+    "@aws-sdk/client-secrets-manager": "^3.699.0",
     "@playwright/test": "^1.42.0",
+    "aws-sdk": "^2.1692.0",
     "dayjs": "^1.11.11",
     "zod": "^3.22.4"
   }
