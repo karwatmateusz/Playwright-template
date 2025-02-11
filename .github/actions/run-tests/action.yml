@@ -1,0 +1,84 @@
+name: Install dependencies and run tests
+description: "A composite action that runs a sequence of steps"
+inputs:
+  env:
+    description: "env to run tests"
+    required: true
+  some:
+    description: "A list of steps to run"
+    required: true
+  value:
+    description: "The working directory"
+    required: true
+  aws-access-key-id:
+    description: ""
+    required: true
+  aws-secret-access-key:
+    description: ""
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: "npm"
+
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      id: cache-npm
+      with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Cache playwright binaries
+      uses: actions/cache@v4
+      id: cache-playwright
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
+    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      name: List the state of node modules
+      continue-on-error: true
+      run: npm list
+      shell: bash
+
+    - name: Install dependencies
+      run: npm ci
+      shell: bash
+
+    - name: Install Playwright Browsers
+      if: ${{ steps.cache-playwright.outputs.cache-hit != 'true' }}
+      run: npx playwright install --with-deps chromium
+      shell: bash
+
+    - name: set aws
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ inputs.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ inputs.AWS_SECRET_ACCESS_KEY }}
+        aws-region: eu-north-1
+
+    - name: get aws secret
+      uses: aws-actions/aws-secretsmanager-get-secrets@v2
+      with:
+        secret-ids: |
+          ENVIK, test/beta/acc
+          test/beta/acc
+
+    - name: display event name
+      shell: bash
+      run: |
+        echo "env is ${{inputs.env}}"
+        echo "event name is ${{ github.event_name }}"
+        echo "type ${{ github.event.inputs.type }}"
+        echo "some is ${{ inputs.some }}"
+        echo "value is ${{ inputs.value }}"
+
+    - name: Run Playwright tests
+      run: npx playwright test --grep ${{ inputs.env }}
+      shell: bash
