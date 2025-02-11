@@ -3,7 +3,7 @@ import { test as calculation } from "@playwright/test"
 //@ts-expect-error
 import { calculateYamlCoverage } from "feature-map"
 // import { configEnv } from '@setup/config'
-import { configEnv } from "../setup/config"
+import { configEnv } from "setup/config"
 
 calculation("Feature Map", async () => {
   const runCalculationCoverage = configEnv.calculate_coverage
