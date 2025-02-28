@@ -9,6 +9,8 @@ on:
       type:
         description: "text"
         type: string
+permissions:
+  id-token: write
 
 jobs:
   reusable_tests_job:
