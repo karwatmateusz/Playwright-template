@@ -34,6 +34,11 @@ jobs:
           env: ${{ secrets.ENV_SECRET }}
           some: "ASD"
           value: "value123"
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
   report:
     needs: reusable_tests_job
     runs-on: ubuntu-latest
