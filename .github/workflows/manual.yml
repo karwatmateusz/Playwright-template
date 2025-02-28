@@ -17,6 +17,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: list files
+        run: ls -la
+
       - name: prepare text
         id: typetext
         run: |
