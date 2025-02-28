@@ -1,7 +1,6 @@
-import { expect, test } from "@playwright/test"
-import dayjs = require("dayjs")
-import utc from "dayjs/plugin/utc"
-import timezone from "dayjs/plugin/timezone"
+import { expect, test } from "@playwright/test";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 // import { secret } from "@setup/getAwsData"
 // import { configEnv } from "@setup/config"
 // import { forTest } from "@utils/sample.util"
@@ -12,35 +11,24 @@ import timezone from "dayjs/plugin/timezone"
 // })
 
 test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
-  expect(1).toEqual(1)
-  console.log("TESTING COMMIT QA ENV ")
-  await page.waitForTimeout(100)
+  expect(1).toEqual(1);
+  console.log("TESTING COMMIT QA ENV ");
+  await page.waitForTimeout(100);
   // console.log(await secret())
-})
+});
 
 test.only("failing test", { tag: "@test" }, async ({ page }) => {
-  console.log("TEST ENV 1")
+  console.log("TEST ENV 1");
   // console.log(configEnv)
   // console.log(process.env)
   // console.log(configEnv.ENV)
   // console.log(process.env.ENV)
   // console.log(process.env._test_beta_acc)
   // console.log(process.env.TEST_BETA_ACC)
-  expect(1).toEqual(1)
-  await someAsyncFunction("1", 2)
-  await page.waitForTimeout(5000)
-})
-
-test("something", async ({ page }) => {
-  dayjs.extend(utc)
-  dayjs.extend(timezone)
-
-  console.log(dayjs.utc().tz("Europe/Warsaw", true).format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"))
-
-  const response = await page.request.get("https://playwright.dev")
-  expect(response.status()).toBe(200)
-  expect(response.url()).toBe("https://playwright.dev/")
-})
+  expect(1).toEqual(1);
+  await someAsyncFunction("1", 2);
+  await page.waitForTimeout(5000);
+});
 
 // test("get started link", async ({ page }) => {
 //   await page.goto("https://playwright.dev/")
@@ -55,5 +43,5 @@ test("something", async ({ page }) => {
 // })
 
 async function someAsyncFunction(name: string, id: number) {
-  console.log(name, id)
+  console.log(name, id);
 }
