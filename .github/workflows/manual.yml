@@ -11,6 +11,7 @@ on:
         type: string
 permissions:
   id-token: write
+  pages: write
 
 jobs:
   reusable_tests_job:
