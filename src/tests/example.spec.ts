@@ -1,4 +1,6 @@
 import { expect, request, test } from "@playwright/test";
+import { configEnv } from "../../setup/config";
+
 // import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api-plugin';
 // import { secret } from "@setup/getAwsData"
 // import { configEnv } from "@setup/config"
@@ -35,6 +37,9 @@ import { expect, request, test } from "@playwright/test";
 
 
 test.only('apiFetchNoCustom', async ({ request, page }, TestConfig) => {
+  console.log('eeeeee')
+  console.log(configEnv.ENVVAR)
+  console.log(typeof configEnv.ENVVAR)
   console.log(process.env.ENVVAR)
   console.log(typeof process.env.ENVVAR)
   // await page.goto('https://playwright.dev/');
