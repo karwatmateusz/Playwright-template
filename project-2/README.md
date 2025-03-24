@@ -1,1 +1,0 @@
-Sample playwright project

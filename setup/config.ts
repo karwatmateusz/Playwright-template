@@ -2,7 +2,7 @@
 import { z } from "zod"
 import * as dotenv from "dotenv"
 
-dotenv.config({ path: ".env" })
+dotenv.config()
 
 const envVariables = z.object({
   // url: z.string(),
@@ -20,6 +20,8 @@ console.log('configEnv')
 console.log(configEnv)
 console.log('process.env')
 console.log(process.env)
+console.log('parsed configEnv')
+console.log( envVariables.parse(process.env))
 
 declare global {
   namespace NodeJS {
