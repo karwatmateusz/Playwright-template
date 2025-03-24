@@ -2,7 +2,7 @@
 import { z } from "zod"
 import * as dotenv from "dotenv"
 
-dotenv.config()
+dotenv.config({ path: ".env"  });
 
 const envVariables = z.object({
   // url: z.string(),
@@ -11,8 +11,17 @@ const envVariables = z.object({
   // accessKeyId: z.string(),
   // secretAccessKey: z.string(),
   // region: z.string(),
-  ENVVAR: z.boolean(),
+  // ENVVAR: z.preprocess((val) => {
+  //   return val as boolean  // return undefined if not a string
+  // }, z.string().optional()).transform((val) => {return !!val}),
+  ENVVAR: z.string().transform((val) => val === 'true'),
   type: z.string(),
+  repeat: z.string().transform((val) => {
+    if (val.trim() !== '' && !isNaN(Number(val))) {
+      return parseInt(val, 10)
+    }
+    return 
+  }).optional(),
 })
 
 const configEnv = envVariables.parse(process.env)
