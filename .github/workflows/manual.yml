@@ -8,7 +8,7 @@ on:
         type: string
       type:
         description: "text"
-        type: string
+        type: boolean
 permissions:
   id-token: write
   pages: write
@@ -35,7 +35,8 @@ jobs:
           echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
           ENV=${{ github.event.inputs.environment}}
           echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
-          echo "ENVVAR=true" >> "$GITHUB_OUTPUT"
+          envvar=${{ inputs.type}}
+          echo "ENVVAR=${envvar}" >> "$GITHUB_OUTPUT"
 
       - name: start
         uses: ./.github/actions/run-tests/
