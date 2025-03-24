@@ -1,6 +1,5 @@
-import { expect, test } from "@playwright/test";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
+import { expect, request, test } from "@playwright/test";
+import { apiFetch, apiGet, apiPost, apiPut, apiDelete, apiPatch, apiHead } from 'pw-api-plugin';
 // import { secret } from "@setup/getAwsData"
 // import { configEnv } from "@setup/config"
 // import { forTest } from "@utils/sample.util"
@@ -17,7 +16,36 @@ test("TESTING COMMIT", { tag: "@qa" }, async ({ page }) => {
   // console.log(await secret())
 });
 
-test.only("failing test", { tag: "@test" }, async ({ page }) => {
+test('apiFetch', async ({request, page }) => { 
+        const responsePut = await apiPut({ request, page }, 'https://jsonplaceholder.typicode.com/posts/1', {
+            body: {
+                id: 1,
+                title: 'foo',
+                body: 'bar',
+                userId: 1,
+            },
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+        });
+        expect(responsePut.ok()).toBeTruthy();
+        const responseBodyPut = await responsePut.json();
+        expect(responseBodyPut).toHaveProperty('id', 1);
+})
+
+
+test.only('apiFetchNoCustom', async ({ request, page }, TestConfig) => {
+  console.log(process.env.ENVVAR)
+  console.log(typeof process.env.ENVVAR)
+  await page.goto('https://playwright.dev/');
+  const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
+  expect(response.ok()).toBeTruthy();
+  const responseBody = await response.json();
+  expect(responseBody).toHaveProperty('id', 1);
+  await expect(page.locator('.hero hero--primary heroBanner_UJJx')).toHaveScreenshot('responseBody.png');
+})
+
+test("failing test", { tag: "@test" }, async ({ page }) => {
   console.log("TEST ENV 1");
   // console.log(configEnv)
   // console.log(process.env)
@@ -27,6 +55,7 @@ test.only("failing test", { tag: "@test" }, async ({ page }) => {
   // console.log(process.env.TEST_BETA_ACC)
   expect(1).toEqual(1);
   await someAsyncFunction("1", 2);
+  expect(1).toEqual(2);
   await page.waitForTimeout(5000);
 });
 
