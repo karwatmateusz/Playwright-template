@@ -12,10 +12,10 @@ inputs:
     required: false
   type:
     description: "The type of test to run"
-    required: false
+    required: true
   envvar:
     description: "The environment variable to set"
-    required: false
+    required: true
   aws-access-key-id:
     description: ""
     required: false
