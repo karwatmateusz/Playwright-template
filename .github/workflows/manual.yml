@@ -18,8 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     environment: ${{ github.event.inputs.environment}}
     steps:
+      - name: actor
+        run: |
+          actor=${{ github.actor }}
+          trigger=${{ github.triggering_actor}}
+          echo "ACTOR=${actor}" >> "$GITHUB_OUTPUT"
+          echo "TRIGGER=${trigger}" >> "$GITHUB_OUTPUT"
       - uses: actions/checkout@v4
-
       - name: list files
         run: ls -la
 
@@ -50,7 +55,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-
       - name: list files
         run: ls -la
 
