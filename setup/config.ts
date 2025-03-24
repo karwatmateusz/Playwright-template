@@ -11,7 +11,7 @@ const envVariables = z.object({
   // accessKeyId: z.string(),
   // secretAccessKey: z.string(),
   // region: z.string(),
-  ENVVAR: z.preprocess((val: unknown) => val === 'true', z.boolean().optional()),
+  ENVVAR: z.boolean().optional(),
 })
 
 const configEnv = envVariables.parse(process.env)
