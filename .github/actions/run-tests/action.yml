@@ -62,6 +62,7 @@ runs:
 
     - name: prepare text
       id: typetext
+      shell: bash
       run: |
         TYPE=${{ github.event.inputs.type }}
         echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
