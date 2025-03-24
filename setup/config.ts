@@ -16,6 +16,11 @@ const envVariables = z.object({
 
 const configEnv = envVariables.parse(process.env)
 
+console.log('configEnv')
+console.log(configEnv)
+console.log('process.env')
+console.log(process.env)
+
 declare global {
   namespace NodeJS {
     interface ProcessEnv extends z.infer<typeof envVariables> {}
