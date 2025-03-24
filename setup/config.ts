@@ -7,11 +7,11 @@ dotenv.config()
 const envVariables = z.object({
   // url: z.string(),
   // calculate_coverage: z.string(),
-  ENV: z.string().optional(),
+  ENV: z.string(),
   // accessKeyId: z.string(),
   // secretAccessKey: z.string(),
   // region: z.string(),
-  ENVVAR: z.boolean().optional(),
+  ENVVAR: z.boolean(),
 })
 
 const configEnv = envVariables.parse(process.env)
