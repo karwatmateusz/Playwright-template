@@ -10,6 +10,12 @@ inputs:
   value:
     description: "The working directory"
     required: false
+  type:
+    description: "The type of test to run"
+    required: false
+  envvar:
+    description: "The environment variable to set"
+    required: false
   aws-access-key-id:
     description: ""
     required: false
@@ -64,11 +70,10 @@ runs:
       id: typetext
       shell: bash
       run: |
-        TYPE=${{ github.event.inputs.type }}
+        TYPE=${{ inputs.type }}
         echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
         ENV=${{ github.event.inputs.environment}}
-        echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
-        envvar=${{ inputs.type}}
+        envvar=${{ inputs.envvar }}
         echo "ENVVAR=${envvar}" >> "$GITHUB_OUTPUT"
 
     - name: Run Playwright tests

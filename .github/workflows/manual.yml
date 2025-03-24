@@ -44,6 +44,8 @@ jobs:
           env: ${{ secrets.ENV_SECRET }}
           some: "ASD"
           value: "value123"
+          type: ${{ inputs.type }}
+          envvar: ${{ inputs.type }}
 
       - name: upload
         uses: actions/upload-artifact@v4
