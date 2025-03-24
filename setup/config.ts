@@ -15,7 +15,7 @@ const envVariables = z.object({
   //   return val as boolean  // return undefined if not a string
   // }, z.string().optional()).transform((val) => {return !!val}),
   ENVVAR: z.string().transform((val) => val === 'true'),
-  type: z.string(),
+  TYPE: z.string(),
   repeat: z.string().transform((val) => {
     if (val.trim() !== '' && !isNaN(Number(val))) {
       return parseInt(val, 10)
