@@ -35,7 +35,7 @@ jobs:
           echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
           ENV=${{ github.event.inputs.environment}}
           echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
-          echo "ENVVAR=false" >> "$GITHUB_OUTPUT"
+          echo "ENVVAR=true" >> "$GITHUB_OUTPUT"
 
       - name: start
         uses: ./.github/actions/run-tests/
