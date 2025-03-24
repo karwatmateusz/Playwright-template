@@ -12,6 +12,7 @@ const envVariables = z.object({
   // secretAccessKey: z.string(),
   // region: z.string(),
   ENVVAR: z.boolean(),
+  type: z.string(),
 })
 
 const configEnv = envVariables.parse(process.env)

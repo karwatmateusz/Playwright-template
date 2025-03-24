@@ -73,10 +73,11 @@ runs:
       shell: bash
       run: |
         TYPE=${{ inputs.type }}
-        echo "TYPE=${TYPE}" >> "$GITHUB_ENV"
+        echo "TYPE=${{ inputs.type }}" >> "$GITHUB_ENV"
         ENV=${{ github.event.inputs.environment}}
+        echo "ENV=${ENV}" >> "$GITHUB_ENV"
         envvar=${{ inputs.envvar }}
-        echo "ENVVAR=${envvar}" >> "$GITHUB_ENV"
+        echo "ENVVAR=${{inputs.envvar}}" >> "$GITHUB_ENV"
 
     - name: Run Playwright tests
       run: npx playwright test
