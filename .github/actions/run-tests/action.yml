@@ -24,6 +24,29 @@ runs:
         node-version: 20
         cache: "npm"
 
+    - name: Cache dependencies
+      uses: actions/cache@v4
+      id: cache-npm
+      with:
+        path: |
+          **/node_modules
+        key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+
+    - name: Cache playwright binaries
+      uses: actions/cache@v4
+      id: cache-playwright
+      with:
+        path: ~/.cache/ms-playwright
+        key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-playwright-
+
+    - if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+      name: List the state of node modules
+      continue-on-error: true
+      run: npm list
+      shell: bash
+
     - name: List the state of node modules
       continue-on-error: true
       run: npm list
@@ -36,6 +59,16 @@ runs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
       shell: bash
+
+    - name: prepare text
+      id: typetext
+      run: |
+        TYPE=${{ github.event.inputs.type }}
+        echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
+        ENV=${{ github.event.inputs.environment}}
+        echo "TYPE=${TYPE}" >> "$GITHUB_OUTPUT"
+        envvar=${{ inputs.type}}
+        echo "ENVVAR=${envvar}" >> "$GITHUB_OUTPUT"
 
     - name: Run Playwright tests
       run: npx playwright test
