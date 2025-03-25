@@ -4,6 +4,9 @@ inputs:
   env:
     description: "env to run tests"
     required: false
+  application:
+    description: "The application to run tests"
+    required: true
   some:
     description: "A list of steps to run"
     required: false
@@ -84,5 +87,5 @@ runs:
         echo "ENVVAR=${{inputs.envvar}}" >> "$GITHUB_ENV"
 
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --project=${{ inputs.application }}
       shell: bash

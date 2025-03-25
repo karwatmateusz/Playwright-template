@@ -9,6 +9,9 @@ on:
       type:
         description: "text"
         type: boolean
+      application:
+        description: "The application to run tests"
+        type: string
 permissions:
   id-token: write
   pages: write
@@ -42,6 +45,7 @@ jobs:
         uses: ./.github/actions/run-tests/
         with:
           env: ${{ secrets.ENV_SECRET }}
+          application: ${{ inputs.application}}
           some: "ASD"
           value: "value123"
           type: ${{ inputs.type }}
