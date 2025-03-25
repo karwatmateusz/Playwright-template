@@ -81,6 +81,7 @@ runs:
         echo "ENV=${ENV}" >> "$GITHUB_ENV"
         envvar=${{ inputs.envvar }}
         echo "ENVVAR=${{inputs.envvar}}" >> "$GITHUB_ENV"
+        echo "APPLICATION = ${{ inputs.application == 'chromium' && inputs.type || inputs.application == 'web' && 'costam' }}"
 
     - name: Run Playwright tests
       run: npx playwright test --project=${{ inputs.application }}
