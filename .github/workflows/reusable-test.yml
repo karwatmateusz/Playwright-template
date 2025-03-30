@@ -5,11 +5,12 @@ on:
       caller-repo:
         required: true
         type: string
-        description: "The repository that called this workflow"
       pr-number:
         required: true
-        type: string
-        description: "Pull request number from the calling repository"
+        type: number
+    secrets:
+      github-token:
+        required: true
 
 permissions:
   issues: write
