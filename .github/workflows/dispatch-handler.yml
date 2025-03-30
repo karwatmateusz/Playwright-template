@@ -27,14 +27,14 @@ jobs:
       - name: Run tests
         run: npx playwright test
 
-      - name: Create comment with results
-        if: always()
-        uses: peter-evans/create-or-update-comment@v3
-        with:
-          repository: ${{ github.event.client_payload.repository }}
-          issue-number: ${{ github.event.client_payload.pr_number }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: |
-            Template repository test results for PR #${{ github.event.client_payload.pr_number }}:
-            Status: ${{ job.status }}
-            Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+      # - name: Create comment with results
+      #   if: always()
+      #   uses: peter-evans/create-or-update-comment@v3
+      #   with:
+      #     repository: ${{ github.event.client_payload.repository }}
+      #     issue-number: ${{ github.event.client_payload.pr_number }}
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     body: |
+      #       Template repository test results for PR #${{ github.event.client_payload.pr_number }}:
+      #       Status: ${{ job.status }}
+      #       Run URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
