@@ -2,6 +2,16 @@ name: Handle Test Trigger
 on:
   repository_dispatch:
     types: [trigger-tests]
+  workflow_dispatch:
+    inputs:
+      caller-repo:
+        description: "Repository that triggered the workflow"
+        required: false
+        type: string
+      pr-number:
+        description: "Pull request number to comment on"
+        required: false
+        type: number
 
 permissions:
   issues: write
