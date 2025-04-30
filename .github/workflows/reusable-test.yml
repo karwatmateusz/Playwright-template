@@ -9,7 +9,7 @@ on:
         required: true
         type: number
     secrets:
-      github-token:
+      PAT_TOKEN:
         required: true
 
 permissions:
