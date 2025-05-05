@@ -11,6 +11,11 @@ on:
     secrets:
       PAT_TOKEN:
         required: false
+      ENV_SECRET:
+        required: false
+      ENVSEC:
+        required: false
+  # This is for testing the workflow manually
   workflow_dispatch:
     inputs:
       caller-repo:
