@@ -8,6 +8,9 @@ on:
       pr-number:
         required: true
         type: number
+    secrets:
+      PAT_TOKEN:
+        required: false
   workflow_dispatch:
     inputs:
       caller-repo:
