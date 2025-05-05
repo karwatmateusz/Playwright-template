@@ -51,6 +51,12 @@ jobs:
           echo "ENVSEC=${{ secrets.ENVSEC }}" >> $GITHUB_ENV
           echo "ENV_SECRET=${{ secrets.ENV_SECRET }}" >> $GITHUB_ENV
 
+      - name: view the secrets context
+        shell: bash
+        run: echo "$SECRETS_CONTEXT"
+        env:
+          SECRETS_CONTEXT: ${{ toJson(secrets) }}
+
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
 
