@@ -27,11 +27,16 @@ permissions:
 jobs:
   run-tests:
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - uses: actions/checkout@v4
+        # if: ${{ github.event_name == 'workflow_call' }}
         with:
           repository: karwatmateusz/Playwright-template
           token: ${{ secrets.PAT_TOKEN }}
+
+      # - uses: actions/checkout@v4
+      # if: ${{ github.event_name == 'workflow_dispatch' }}
 
       - uses: actions/setup-node@v4
         with:
@@ -40,6 +45,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Set up environment variables
+        run: |
+          echo "ENVSEC=${{ secrets.ENVSEC }}" >> $GITHUB_ENV
+          echo "ENV_SECRET=${{ secrets.ENV_SECRET }}" >> $GITHUB_ENV
 
       - name: Install Playwright
         run: npx playwright install --with-deps chromium
