@@ -7,4 +7,11 @@ test("has title", async ({ page }) => {
   await page.waitForTimeout(5000)
   console.log('RUNNING TESTS IN PW REPO')
   expect(1).toBe(1)
+  
 })
+
+test('test', async ({ page }) => {
+  await page.goto('https://playwright.dev/');
+  await page.getByRole('link', { name: 'Get started' }).click();
+  await expect(page.locator('fh1')).toContainText('Installation');
+});
